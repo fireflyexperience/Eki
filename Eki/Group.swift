@@ -74,6 +74,7 @@ public func ==(lhs: Group, rhs: Group) -> Bool {
     return lhs.group.isEqual(rhs.group)
 }
 
+
 //MARK: Operator
 public func <<< (g:Group,block:() -> Void) -> Group {
     return g.async(block)

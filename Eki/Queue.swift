@@ -12,8 +12,8 @@ import Foundation
 A wrapper for Grand Central Dispatch Queue
 */
 public enum Queue {
-    static var currentKey = 0 //"Eki.queue"
-    static var onceSpecifics = OnceDispatcher() //"Eki.queue"
+    private static var currentKey = 0
+    private static var onceSpecifics = OnceDispatcher()
 
     case Main
     case UserInteractive
@@ -139,7 +139,7 @@ public enum Queue {
     }
     
     //MARK: Current Queuess
-    public static func initOnceGlobalQueueSpecifics() {
+    private static func initOnceGlobalQueueSpecifics() {
         onceSpecifics { () -> Void in
             for q in Queue.allDefaults {
                 q.setCurrentSpecific()
@@ -171,7 +171,7 @@ public enum Queue {
         let currentQueue = Unmanaged<dispatch_queue_t>.fromOpaque(COpaquePointer(getCurrentPointer())).takeUnretainedValue()
         
         for q in Queue.allDefaults {
-            if q.dispatchQueue as! String == currentQueue as! String {
+            if q.dispatchQueue === currentQueue {
                 return q
             }
         }
