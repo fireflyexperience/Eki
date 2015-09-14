@@ -71,7 +71,7 @@ public class Group {
 // MARK: Equatable
 extension Group: Equatable { }
 public func ==(lhs: Group, rhs: Group) -> Bool {
-    return lhs.group == rhs.group
+    return lhs.group.isEqual(rhs.group)
 }
 
 //MARK: Operator

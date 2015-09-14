@@ -78,7 +78,7 @@ class EkiTests: XCTestCase {
         }
         
         task.async() <> {
-            test = test.reverse()
+            test = Array(test.reverse())
             } <> Queue.Main + {
                 expt.fulfill()
                 XCTAssertEqual(test, [0,1], "Blocks have not been executed on a chain")
@@ -157,7 +157,7 @@ class EkiTests: XCTestCase {
             let current = Queue.current
             switch current  {
             case Queue.Background:
-                println()
+                print("")
             default:
                 XCTFail("current should be background")
             }

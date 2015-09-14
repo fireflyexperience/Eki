@@ -105,15 +105,15 @@ public enum Queue {
         case .Main:
             return dispatch_get_main_queue()
         case .UserInteractive:
-            return dispatch_get_global_queue(Int(QOS_CLASS_USER_INTERACTIVE.value), 0)
+            return dispatch_get_global_queue(Int(QOS_CLASS_USER_INTERACTIVE.rawValue), 0)
         case .UserInitiated:
-            return dispatch_get_global_queue(Int(QOS_CLASS_USER_INITIATED.value), 0)
+            return dispatch_get_global_queue(Int(QOS_CLASS_USER_INITIATED.rawValue), 0)
         case .Default:
-            return dispatch_get_global_queue(Int(QOS_CLASS_DEFAULT.value), 0)
+            return dispatch_get_global_queue(Int(QOS_CLASS_DEFAULT.rawValue), 0)
         case .Utility:
-            return dispatch_get_global_queue(Int(QOS_CLASS_UTILITY.value), 0)
+            return dispatch_get_global_queue(Int(QOS_CLASS_UTILITY.rawValue), 0)
         case .Background:
-            return dispatch_get_global_queue(Int(QOS_CLASS_BACKGROUND.value), 0)
+            return dispatch_get_global_queue(Int(QOS_CLASS_BACKGROUND.rawValue), 0)
         case .Custom(let queue):
             return queue
         }
@@ -171,7 +171,7 @@ public enum Queue {
         let currentQueue = Unmanaged<dispatch_queue_t>.fromOpaque(COpaquePointer(getCurrentPointer())).takeUnretainedValue()
         
         for q in Queue.allDefaults {
-            if q.dispatchQueue == currentQueue {
+            if q.dispatchQueue as! String == currentQueue as! String {
                 return q
             }
         }
